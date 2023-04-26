@@ -16,9 +16,21 @@ function createGrid(numCells, eleContainer) {
   }
 }
 
+
+function generateBomb(min, max, numbers)   {
+  while (numbers.length < 16) {
+    let minesRandom = Math.floor(Math.random() * (max - min + 1) ) + min;
+    if (!numbers.includes(minesRandom)) {
+  numbers.push(minesRandom);
+  }};
+}
+
 /* DEFINIZIONI DELLE VARIBILI */
 
 const eleBtn = document.querySelector('.btn_play');
+const minesArr = [];
+let points = 0;
+generateBomb (1, 100, minesArr);
 
 /* FUNZIONE DI ATTIVAZIONE DEL PROGRAMMA */
 eleBtn.addEventListener("click", function () {
@@ -31,14 +43,17 @@ eleBtn.addEventListener("click", function () {
     eleGrid.classList.remove("grid_easy", "grid_medium", "grid_hard");
     eleGrid.classList.add("grid_easy");
     createGrid(100, eleGrid);
+    generateBomb (1, 100, minesArr);
   } else if (value === "81") {
     eleGrid.classList.remove("grid_easy", "grid_medium", "grid_hard");
     eleGrid.classList.add("grid_medium");
     createGrid(81, eleGrid);
+    generateBomb (1, 81, minesArr);
   } else if (value === "49") {
     eleGrid.classList.remove("grid_easy", "grid_medium", "grid_hard");
     eleGrid.classList.add("grid_hard");
     createGrid(49, eleGrid);
+    generateBomb (1, 49, minesArr);
   }
 
   const eleCells = document.querySelectorAll(".cell");
@@ -47,7 +62,15 @@ eleBtn.addEventListener("click", function () {
     const cell = eleCells[i];
     cell.addEventListener("click", function () {
       console.log("Hai cliccato la cella" + this.innerHTML);
-      this.classList.toggle("clicked");
+      
+      
+      if (minesArr.includes(i + 1)) {
+        console.log("Hai perso!")
+        this.classList.toggle("lose");
+      } else {
+        this.classList.toggle("clicked");
+        points++;
+      }
     });
   }
 });
