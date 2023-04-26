@@ -43,11 +43,11 @@
 	cursor: pointer;
 }
 
-.clicked {
+.blu {
 	background-color: rgb(83, 111, 235);
 }
 
-.lose {
+.red {
     background-color: red;
 }
 
@@ -56,4 +56,12 @@ footer {
     left: 0;
     bottom: 0;
     right: 0;
+}
+
+.user_lose {
+    display: none;
+}
+
+.user_text {
+    display: block;
 }

@@ -57,18 +57,20 @@ eleBtn.addEventListener("click", function () {
   }
 
   const eleCells = document.querySelectorAll(".cell");
+  const userLose = document.querySelector(".user_lose");
+  const userPoints = document.querySelector(".score");
 
   for (let i = 0; i < eleCells.length; i++) {
     const cell = eleCells[i];
     cell.addEventListener("click", function () {
-      
+      console.log("Hai cliccato la cella" + this.innerHTML);
       if (minesArr.includes(i + 1)) {
-        console.log("Hai cliccato la cella" + this.innerHTML);
-        this.classList.toggle("lose");
+        this.classList.toggle("red");
+        userLose.classList.add("user_text");
       } else {
-        console.log("Hai cliccato la cella" + this.innerHTML);
-        this.classList.toggle("clicked");
+        this.classList.toggle("blu");
         points++;
+        userPoints.innerHTML = points;
       }
     });
   }
