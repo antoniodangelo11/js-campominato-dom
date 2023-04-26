@@ -23,33 +23,33 @@ function generateBomb(min, max, numbers)   {
     if (!numbers.includes(minesRandom)) {
   numbers.push(minesRandom);
   }};
+  console.log(numbers);
 }
 
 /* DEFINIZIONI DELLE VARIBILI */
 
 const eleBtn = document.querySelector('.btn_play');
-const minesArr = [];
 let points = 0;
-generateBomb (1, 100, minesArr);
 
 /* FUNZIONE DI ATTIVAZIONE DEL PROGRAMMA */
 eleBtn.addEventListener("click", function () {
   const eleGrid = document.querySelector(".grid");
   const eleLevel = document.querySelector("#level");
+  const minesArr = [];
   let value = eleLevel.options[eleLevel.selectedIndex].value;
   console.log(value);
 
-  if (value === "100") {
+  if (value == "100") {
     eleGrid.classList.remove("grid_easy", "grid_medium", "grid_hard");
     eleGrid.classList.add("grid_easy");
     createGrid(100, eleGrid);
     generateBomb (1, 100, minesArr);
-  } else if (value === "81") {
+  } else if (value == "81") {
     eleGrid.classList.remove("grid_easy", "grid_medium", "grid_hard");
     eleGrid.classList.add("grid_medium");
     createGrid(81, eleGrid);
     generateBomb (1, 81, minesArr);
-  } else if (value === "49") {
+  } else if (value == "49") {
     eleGrid.classList.remove("grid_easy", "grid_medium", "grid_hard");
     eleGrid.classList.add("grid_hard");
     createGrid(49, eleGrid);
@@ -61,13 +61,12 @@ eleBtn.addEventListener("click", function () {
   for (let i = 0; i < eleCells.length; i++) {
     const cell = eleCells[i];
     cell.addEventListener("click", function () {
-      console.log("Hai cliccato la cella" + this.innerHTML);
-      
       
       if (minesArr.includes(i + 1)) {
-        console.log("Hai perso!")
+        console.log("Hai cliccato la cella" + this.innerHTML);
         this.classList.toggle("lose");
       } else {
+        console.log("Hai cliccato la cella" + this.innerHTML);
         this.classList.toggle("clicked");
         points++;
       }
