@@ -45,6 +45,7 @@
 
 .blu {
 	background-color: rgb(83, 111, 235);
+    pointer-events: none;
 }
 
 .red {

@@ -16,19 +16,19 @@ function createGrid(numCells, eleContainer) {
   }
 }
 
-
-function generateBomb(min, max, numbers)   {
-  while (numbers.length < 16) {
-    let minesRandom = Math.floor(Math.random() * (max - min + 1) ) + min;
+function generateBomb(min, max, numbers) {
+  for (let i = 0; numbers.length < 16; i++) {
+    let minesRandom = Math.floor(Math.random() * (max - min + 1)) + min;
     if (!numbers.includes(minesRandom)) {
-  numbers.push(minesRandom);
-  }};
+      numbers.push(minesRandom);
+    }
+  }
   console.log(numbers);
 }
 
 /* DEFINIZIONI DELLE VARIBILI */
 
-const eleBtn = document.querySelector('.btn_play');
+const eleBtn = document.querySelector(".btn_play");
 let points = 0;
 
 /* FUNZIONE DI ATTIVAZIONE DEL PROGRAMMA */
@@ -43,17 +43,17 @@ eleBtn.addEventListener("click", function () {
     eleGrid.classList.remove("grid_easy", "grid_medium", "grid_hard");
     eleGrid.classList.add("grid_easy");
     createGrid(100, eleGrid);
-    generateBomb (1, 100, minesArr);
+    generateBomb(1, 100, minesArr);
   } else if (value == "81") {
     eleGrid.classList.remove("grid_easy", "grid_medium", "grid_hard");
     eleGrid.classList.add("grid_medium");
     createGrid(81, eleGrid);
-    generateBomb (1, 81, minesArr);
+    generateBomb(1, 81, minesArr);
   } else if (value == "49") {
     eleGrid.classList.remove("grid_easy", "grid_medium", "grid_hard");
     eleGrid.classList.add("grid_hard");
     createGrid(49, eleGrid);
-    generateBomb (1, 49, minesArr);
+    generateBomb(1, 49, minesArr);
   }
 
   const eleCells = document.querySelectorAll(".cell");
@@ -64,6 +64,7 @@ eleBtn.addEventListener("click", function () {
     const cell = eleCells[i];
     cell.addEventListener("click", function () {
       console.log("Hai cliccato la cella" + this.innerHTML);
+
       if (minesArr.includes(i + 1)) {
         this.classList.toggle("red");
         userLose.classList.add("user_text");
@@ -75,4 +76,3 @@ eleBtn.addEventListener("click", function () {
     });
   }
 });
-
